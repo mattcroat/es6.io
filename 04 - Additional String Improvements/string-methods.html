@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>New String Methods</title>
 </head>
+
 <body>
 
-<script>
-const course = 'RFB2';
-const flightNumber = '20-AC2018-jz';
-const accountNumber = '825242631RT0001';
+  <script>
+    const course = 'RFB2';
+    const flightNumber = '20-AC2018-jz';
+    const accountNumber = '825242631RT0001';
 
-const make = 'BMW';
-const model = 'x5';
-const colour = 'Royal Blue';
+    const make = 'BMW';
+    const model = 'x5';
+    const colour = 'Royal Blue';
 
-// .startsWith()
+    // .startsWith()
+    course.startsWith('RFB');
+    // returns false because it's case-sensitive
+    course.startsWith('rfb');
+    // skip characters
+    flightNumber.startsWith('AC', 3);
 
-// .endsWith()
+    // .endsWith()
+    flightNumber.endsWith('jz');
+    // take the first x number of characters and ignore the rest
+    accountNumber.endsWith('RT', 11);
 
-// .includes()
+    // .includes()
+    // check if x string is anywhere in it
+    flightNumber.includes('AC');
 
-// .repeat()
+    // .repeat()
+    // useful for something like a left-pad function
+    function leftPad(str, length = 20) {
+      return `→ ${' '.repeat(length - str.length)}${str}`;
+    }
 
-function leftPad(str, length = 20) {
-  return `→ ${' '.repeat(length - str.length)}${str}`;
-}
+    console.log(leftPad(make));
+    console.log(leftPad(model));
+    console.log(leftPad(colour));
 
-console.log(leftPad(make));
-console.log(leftPad(model));
-console.log(leftPad(colour));
-
-
-</script>
+  </script>
 
 </body>
+
 </html>

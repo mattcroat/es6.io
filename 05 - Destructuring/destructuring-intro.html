@@ -1,40 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Destructuring!</title>
 </head>
+
 <body>
-<script>
-  const person = {
-    first: 'Wes',
-    last: 'Bos',
-    country: 'Canada',
-    city: 'Hamilton',
-    twitter: '@wesbos'
-  };
+  <script>
+    // Destructuring is a JavaScript expression
+    // that allows us to extract data from arrays, object, maps and sets
+    // into their own variables
+    const person = {
+      first: 'Wes',
+      last: 'Bos',
+      country: 'Canada',
+      city: 'Hamilton',
+      twitter: '@wesbos'
+    };
 
-  const { first, last, twitter } = person;
+    // sometimes you need to have top level variables
+    const first = person.first;
+    const last = person.last;
 
-  const wes = {
-    first: 'Wes',
-    last: 'Bos',
-    links: {
-      social: {
-        twitter: 'https://twitter.com/wesbos',
-        facebook: 'https://facebook.com/wesbos.developer',
-      },
-      web: {
-        blog: 'https://wesbos.com'
+    // instead of doing that we could do...
+    // this is not a object or block, it's the destructuring syntax
+    // this is saying give me a variable first and a variable last
+    // and take it from person
+    // outputing first would show "Wes" and last would show "Bos"
+    const { first, last, twitter } = person;
+
+    // let's look at some nested data
+    // something we would get back from an api
+    const wes = {
+      first: 'Wes',
+      last: 'Bos',
+      links: {
+        social: {
+          twitter: 'https://twitter.com/wesbos',
+          facebook: 'https://facebook.com/wesbos.developer',
+        },
+        web: {
+          blog: 'https://wesbos.com'
+        }
       }
-    }
-  };
+    };
 
-  const { twitter: tweet, facebook: fb } = wes.links.social;
+    // we could do something like...
+    const twitter = wes.links.social.twitter;
+    const facebook = wes.links.social.facebook;
 
-  const settings = { width: 300, color: 'black' }  // height, fontSize
-  const { width = 100, height = 100, color = 'blue', fontSize = 25} = settings;
+    // but we could just use destructuring
+    const { twitter, facebook } = wes.links.social;
 
-</script>
+    // another use case which would be renaming variables
+    // when there are conflicting variable names
+    const { twitter: tweet, facebook: fb } = wes.links.social;
+
+    // ability to set defaults
+    // let's say we have a function that will do some animation
+    // on our page and it's going to create a element and style it for us
+    // but...the thing that we're building also require a height, fontSize
+    // how do we deal with them when they're not in there?
+    // before you would have a defaults settings object
+    // and then you would merge it with the settings one
+    // but with es6 it's different by using destructuring
+    // and setting a default value
+    const settings = { width: 300, color: 'black' }
+    const { width = 100, height = 100, color = 'blue', fontSize = 25 } = settings;
+
+  </script>
 </body>
+
 </html>

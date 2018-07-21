@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Destructuring in Action!</title>
 </head>
+
 <body>
-<script>
-  let inRing = 'Hulk Hogan';
-  let onSide = 'The Rock';
+  <script>
+    // Destructuring isn't just when you want to grab
+    // variables out of an object or array
 
-  console.log(inRing, onSide);
-  [inRing, onSide] = [onSide, inRing];
-  console.log(inRing, onSide);
+    // We're building a wrestling application
+    let inRing = 'Hulk Hogan';
+    let onSide = 'The Rock';
+    // what happens when they need to switch?
+    // you used to do this and then remove the tmp variable
+    var tmp = inRing;
+    inRing = onSide;
+    onSide = tmp;
+    // but with destructuring we can just swap them
+    console.log(inRing, onSide);
+    [inRing, onSide] = [onSide, inRing]
+    console.log(inRing, onSide);
 
-</script>
+  </script>
 </body>
+
 </html>

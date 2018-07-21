@@ -16,10 +16,30 @@
     return converted;
   }
 
-  function tipCalc({ total = 100, tip = 0.15, tax = 0.13 } = {}) {
+  const hundo = convertCurrency(100);
+
+  console.log(hundo.AUD);
+  console.log(hundo.MEX);
+
+  // you can't return multiple values
+  // but you can can return a object
+  // and destructure the answer
+  const { USD, GPB, AUD, MEX } = convertCurrency(100);
+  // we should be able to take those values
+  // and log them individually
+  console.log(USD, GPB, AUD, MEX);
+
+  // how to make arguments order independant?
+  // wraping the arguments in curly brackets means
+  // that if we pass in an object it's going to destructure
+  // them into three variables available inside this function 
+  function tipCalc({ total, tip = 0.15, tax = 0.13 } = {}) {
     return total + (tip * total) + (tax * total);
   }
 
+  // the order doesn't matter
+  // if no argument is passed we need to
+  // give the function a default itself
   const bill = tipCalc({ tip: 0.20, total: 200 });
   console.log(bill);
 
