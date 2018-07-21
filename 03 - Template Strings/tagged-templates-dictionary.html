@@ -1,30 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Tagged Templates</title>
   <style>
     abbr {
-      border-bottom:1px dotted grey;
+      border-bottom: 1px dotted grey;
     }
   </style>
 </head>
+
 <body>
 
   <div class="bio">
 
   </div>
 
-<script>
-  const dict = {
-    HTML: 'Hyper Text Markup Language',
-    CSS: 'Cascading Style Sheets',
-    JS: 'JavaScript'
-  };
+  <script>
+    // How do we get it so that when you hover
+    // any of these variables if there is a dictionary
+    // item for that variable that it will show up?
+    // That's where we get a tagged template
+    const dict = {
+      HTML: 'Hyper Text Markup Language',
+      CSS: 'Cascading Style Sheets',
+      JS: 'JavaScript'
+    };
 
-  const first = 'Wes';
-  const last = 'Bos';
+    // In this it's going to be different
+    // than the last one because we want to make
+    // a new array of not just the values but
+    // we want an array of values that if there's
+    // an abbreviation we want it wrapped in a abbr
+    function addAbbreviations(strings, ...values) {
+      const abbreviated = values.map(value => {
+        // we're going to check if there's a value in the dictionary
+        if (dict[value]) {
+          // if true return abbreviation tag
+          return `<abbr title="${dict[value]}">${value}</abbr>`;
+        }
+        // if nothing is found just return value
+        return value;
+      });
 
-</script>
+      // finally we use reduce to build the string
+      return strings.reduce((sentence, string, i) => {
+        // take the existing sentence whatever 
+        // it was from the last iteration
+        return `${sentence}${string}${abbreviated[i] || ''}`;
+      }, '');
+    }
+
+    const first = 'Wes';
+    const last = 'Bos';
+
+    const sentence = addAbbreviations`Hello my name is ${first} ${last} and I love to code ${'HTML'}, ${'CSS'}, ${'JS'}`;
+
+    const bio = document.querySelector('.bio');
+    // create our p element
+    const p = document.createElement('p');
+    // set it's inner value
+    p.innerHTML = sentence;
+    // append it
+    bio.appendChild(p);
+
+  </script>
 </body>
+
 </html>

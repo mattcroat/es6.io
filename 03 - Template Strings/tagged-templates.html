@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Tagged Templates</title>
@@ -9,23 +10,53 @@
     }
   </style>
 </head>
+
 <body>
-<script>
-  function highlight(strings, ...values) {
-    let str = '';
-    strings.forEach((string, i) => {
-      str += `${string} <span contenteditable class="hl">${values[i] || ''}</span>`;
-    });
-    return str;
-  }
+  <script>
+    // We can run this string through a function and rather
+    // than the browser put in the variables for us we can
+    // have control over how this actual string is made
 
-  const name = 'Snickers';
-  const age = 100;
+    // When would this be useful? Let's first learn the mechanics
+    // and how it all comes together
 
-  const sentence = highlight`My dog's name is ${name} and he is ${age} years old`;
-  document.body.innerHTML = sentence;
-  console.log(sentence);
+    // First we simply make a function
+    // and take the name of the function we want to run
+    // against the string and we put the name right in front
+    // of the template
 
-</script>
+    // We can give it arguments such as strings, arg1, arg1 ,etc...
+    // but we can use the es6 rest operator strings, ...values
+    function highlight(strings, ...values) {
+      // we can use debugger to stop our app
+      // and observe the variables in dev tools
+      // from the scope tab under sources
+      // debugger;
+      let str = '';
+      strings.forEach((string, i) => {
+        // give me the first value from the strings
+        // and the first value from our values array
+        // then add them together
+        // strings is always going to be one larger than values
+        // so when we get to the last one it returns undefined
+        // we can check if values[i] is undefined and not add it
+        // but we can use or trick which returns a blank string
+        // if there is no values 
+        // str += string + (values[i] || '');
+        // let's for example highlight every variable
+        str += `${string} <span contenteditable class="hl">${values[i] || ''}</span>`;
+      });
+      return str;
+    }
+
+    const name = 'Snickers';
+    const age = 100;
+
+    const sentence = highlight`My dog's name is ${name} and he is ${age} years old`;
+    document.body.innerHTML = sentence;
+    console.log(sentence);
+
+  </script>
 </body>
+
 </html>

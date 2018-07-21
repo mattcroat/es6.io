@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Template Strings!</title>
 </head>
-<body>
-<script>
-  const beer = {
-    name: 'Belgian Wit',
-    brewery: 'Steam Whistle Brewery',
-    keywords: ['pale', 'cloudy', 'spiced', 'crisp']
-  };
 
-  function renderKeywords(keywords) {
-    return `
+<body>
+  <script>
+    // (1) What happens when your data starts to get complex?
+    const beer = {
+      name: 'Belgian Wit',
+      brewery: 'Steam Whistle Brewery',
+      // (2) what if we want to implent this array of keywords
+      // that's nested inside of the actual beer here?
+      keywords: ['pale', 'cloudy', 'spiced', 'crisp']
+    };
+
+    // (4) react like render function
+    // this is going to take in the keywords
+    // and pass it to the map and return each keyword
+    // finally join will return the array as a string
+    function renderKeywords(keywords) {
+      return `
       <ul>
         ${keywords.map(keyword => `<li>${keyword}</li>`).join('')}
       </ul>
     `;
-  }
+    }
 
-  const markup = `
+    // (3) we could just do a map but let's do a render function
+    const markup = `
     <div class="beer">
       <h2>${beer.name}</h2>
       <p class="brewery">${beer.brewery}</p>
@@ -28,8 +38,9 @@
     </div>
   `;
 
-  document.body.innerHTML = markup;
+    document.body.innerHTML = markup;
 
-</script>
+  </script>
 </body>
+
 </html>

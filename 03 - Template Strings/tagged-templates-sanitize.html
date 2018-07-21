@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tagged Templates</title>
+
+  <style>
+    abbr {
+      border-bottom: 1px dotted grey;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bio">
+
+  </div>
+  <!-- dompurify is a library used to sanitize html -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/0.8.2/purify.min.js"></script>
+  <script>
+    // let's create a sanitized tagged template
+    // and use the dompurify library
+    function sanitize(strings, ...values) {
+      const dirty = strings.reduce((prev, next, i) => `${prev}${next}${values[i] || ''}`, '');
+      return DOMPurify.sanitize(dirty);
+    }
+
+    const first = 'Wes';
+    // if this ran it would let the user run javascript on our page
+    // then they could do malicious activity
+    // this is otherwisek nows as XXS or cross-site scripting
+    // the solution to this is to sanitize our html
+    const aboutMe = `I love to do evil <img src="http://unsplash.it/100/100?random" onload="alert('you got hacked');" />`;
+
+    const html = sanitize`
+    <h3>${first}</h3>
+    <p>${aboutMe}</p>
+  `;
+
+    const bio = document.querySelector('.bio');
+    bio.innerHTML = html;
+  </script>
+</body>
+
+</html>
