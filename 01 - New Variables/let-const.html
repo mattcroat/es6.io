@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>let and const</title>
+</head>
+
+<body>
+  <script>
+    // const cannot be updated
+    const key = 'abc123';
+    let points = 50;
+    // winner is scoped to window
+    // thus it will return false
+    // if it was var it would return true
+    // because of the scope
+    let winner = false;
+
+    // const is not immutable
+    // you can't reasign const
+    // but you can change it's properties
+    const person = {
+      name: 'Wes',
+      age: 28
+    }
+
+    // you can use freeze to make it immutable
+    const wes = Object.freeze(person);
+
+  </script>
+</body>
+
+</html>

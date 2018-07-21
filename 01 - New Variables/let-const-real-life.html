@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>let and const real world</title>
+</head>
+
+<body>
+  <script>
+    // we don't need to use a IIFE with let, const
+    // because they're block scope
+    {
+      // name would return blank
+      const name = 'wes';
+      console.log(name);
+    }
+
+    for (let i = 0; i < 10; i++) {
+      // now we have a global variable
+      // that leaks outside of the block scope
+      console.log(i);
+      // we can't reference what the variable was at the time of running
+      // and not at the current time
+      // other than using a IIFE
+      // one quick fix is to simply use let instead of var
+      setTimeout(function () {
+        console.log('The number is ' + i);
+      }, 1000);
+    }
+
+  </script>
+</body>
+
+</html>

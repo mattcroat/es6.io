@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Arrow functions → → </title>
+</head>
+
+<body>
+  <script>
+    const names = ['wes', 'kait', 'lux'];
+
+    // regular function
+    const fullNames = names.map(function (name) {
+      return `${name} bos`;
+    });
+
+    // arrow function
+    const fullNames2 = names.map((name) => {
+      return `${name} bos`;
+    });
+
+    // shorter arrow function
+    // no paranthesis needed for one argument
+    // or curly brackets for a implicit return
+    // and we can drop the return keyword
+    const fullNames3 = names.map(name => {
+      return `${name} bos`;
+    });
+
+    const fullNames4 = names.map(name => `${name} bos`);
+
+    // arrow function without arguments
+    const fullNames5 = names.map(() => `cool bos`);
+
+    const sayMyName = (name) => {
+      alert(`Hello ${name}!`)
+    }
+
+    sayMyName('Wes');
+
+  </script>
+</body>
+
+</html>

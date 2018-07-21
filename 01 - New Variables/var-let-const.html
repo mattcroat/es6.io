@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>let and const</title>
+</head>
+
+<body>
+  <script>
+    // var is function scope
+    function setWidth() {
+      var width = 100;
+      console.log(width);
+    }
+
+    setWidth();
+
+    var age = 100;
+    // var would leak becoming a global variable
+    // if we called it outside the if block
+    if (age > 12) {
+      const dogYears = age * 7;
+      console.log(`You are ${dogYears} dog years old!`);
+    }
+
+    // let, const are block scope
+    let height = 200;
+    const key = 'abc123';
+  </script>
+</body>
+
+</html>

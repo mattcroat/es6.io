@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Default Arguments</title>
+</head>
+
+<body>
+  <script>
+    // what happens if we want to assume 13% tax rate and 15% tip rate?
+    // now in es6 we can just set it when we define our function
+    function calculateBill(total, tax = 0.13, tip = 0.15) {
+      // we would normally do something like this
+      // tax = tax || 0.13;
+      // tip = tip || 0.15;
+
+      return total + (total * tax) + (total * tip);
+    }
+
+    // if we weren't to pass them in we would get undefined back
+    // but with es6 those values are now assumed if nothing is passed in
+    // we can explicitly pass undefined if we want to keep a value but change another
+    const totalBill = calculateBill(100, undefined, 0.25);
+    console.log(totalBill);
+  </script>
+</body>
+
+</html>
