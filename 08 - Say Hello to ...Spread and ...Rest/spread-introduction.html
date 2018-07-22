@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>The ...Spread Operator</title>
 </head>
+
 <body>
-<script>
+  <script>
 
-  const featured = ['Deep Dish', 'Pepperoni', 'Hawaiian'];
-  const specialty = ['Meatzza', 'Spicy Mama', 'Margherita'];
+    const featured = ['Deep Dish', 'Pepperoni', 'Hawaiian'];
+    const specialty = ['Meatzza', 'Spicy Mama', 'Margherita'];
 
-  const pizzas = [...featured, 'veg', ...specialty];
-  const fridayPizzas = [...pizzas];
+    // It's going to take every single item from a iterable
+    // and apply it to the containing array
 
-  const deepDish = {
-    pizzaName: 'Deep Dish',
-    size: 'Medium',
-    ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
-  };
+    // (1) How to combine the two arrays?
+    // We can do something like this
+    const pizzas = featured.concat(specialty);
+    // this would work
+    console.log(pizzas);
+    // (2) What if we wanted to insert a value in the middle?
+    let pizzas = [];
+    pizzas = pizzas.concat(featured);
+    pizzas.push('veg');
+    pizzas = pizzas.concat(specialty);
+    console.log(pizzas);
+    // (3) This quickly becomes a headache so what we can do
+    // is take every single item in the array and ...spread it to a new array
+    const pizzas = [...featured, 'veg', ...specialty];
+    // (4) What if you want to copy an array?
+    // You could do something like this but it's not immutable
+    // meaning if we change fridayPizza we will overwrite pizzas
+    // We didn't copy the array, we just referenced it
+    const fridayPizzas = pizzas;
+    // What you had to do was
+    const fridayPizza = [].concat(pizzas);
+    // but with ...spread it's simpler
+    // now you have a new fresh 🍕 array
+    const fridayPizza = [...pizzas];
 
-</script>
+    const deepDish = {
+      pizzaName: 'Deep Dish',
+      size: 'Medium',
+      ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
+    };
+
+  </script>
 </body>
+
 </html>

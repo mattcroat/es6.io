@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Spread Examples</title>
 </head>
+
 <body>
-<script>
-  const inventors = ['Einstein', 'Newton', 'Galileo'];
-  const newInventors = ['Musk', 'Jobs'];
-  inventors.push(...newInventors);
-  console.log(inventors);
+  <script>
+    const inventors = ['Einstein', 'Newton', 'Galileo'];
+    const newInventors = ['Musk', 'Jobs'];
 
-  const name = ['Wes', 'Bos'];
+    // (1) We want to join the two arrays but we get a nested array
+    // with only push so we we can do push.apply with inventors passed in as this
+    // and this works because when you call apply it's gonnna run the function
+    // that you called apply against but as every single item of the array as an argument
+    inventors.push.apply(inventors, newInventors);
+    console.log(inventors);
+    // but you can just ...spread it into a function
+    inventors.push(...newInventors);
+    console.log(inventors);
 
-  function sayHi(first, last) {
-    alert(`Hey there ${first} ${last}`);
-  }
+    // (2) Let's take this example
+    const name = ['Wes', 'Bos'];
 
-  sayHi(...name);
-
-</script>
+    function sayHi(first, last) {
+      alert(`Hey there ${first} ${last}`);
+    }
+    // you could do this
+    // but it doesn't work that well if it gets more complex
+    sayHi(name[0], name[1]);
+    // so instead we could just ...spread the array
+    sayHi(...name)
+  </script>
 </body>
+
 </html>
-
-

@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>The ...Rest Param</title>
 </head>
+
 <body>
-<script>
-  // function convertCurrency(rate, tax, tip, ...amounts) {
-  //   console.log(rate, tax, tip, amounts);
-  //   return amounts.map(amount => amount * rate);
-  // }
+  <script>
+    // Opposite of ...spread
+    // If a spread param takes one thing and unpacks it into multiple items
+    // the rest param takes multiple things and packs it into a single array
+    
+    // (1) We don't know how many currencies will the person pass
+    // so we can use ...rest
+    function convertCurrency(rate, tax, tip, ...amounts) {
+      console.log(rate, tax, tip, amounts);
+      return amounts.map(amount => amount * rate);
+    }
 
-  // const amounts = convertCurrency(1.54, 10, 23, 52, 1, 56);
-  // console.log(amounts);
+    // imagine these are in dollars
+    const amounts = convertCurrency(1.54, 10, 23, 52, 1, 56);
+    console.log(amounts);
 
-  const runner = ['Wes Bos', 123, 5.5, 5, 3, 6, 35];
-  const [name, id, ...runs] = runner;
-  console.log(name, id, runs);
+    // (2) Let's say we have an array of data that came from a jogging application
+    const runner = ['Wes Bos', 123, 5.5, 5, 3, 6, 35];
+    // we want to destructure this data assuming the first item will be the name,
+    // the second the runner id and the rest of the items log of runs
+    const [name, id, ...runs] = runner;
+    console.log(name, id, runs);
 
-  const team = ['Wes', 'Kait', 'Lux', 'Sheena', 'Kelly'];
-  const [captain, assistant, ...players] = team;
-  console.log(captain, assistant, players)
-
-</script>
+    // (3) Team example
+    const team = ['Wes', 'Kait', 'Lux', 'Sheena', 'Kelly'];
+    const [captain, assistant, ...players] = team;
+    console.log(captain, assistant, players);
+  </script>
 </body>
+
 </html>

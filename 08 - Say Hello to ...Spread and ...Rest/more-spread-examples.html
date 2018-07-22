@@ -1,40 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Spread Examples</title>
 </head>
+
 <body>
   <div class="people">
     <p>Wes</p>
     <p>Kait</p>
     <p>Randy</p>
   </div>
-<script>
-  const people = Array.from(document.querySelectorAll('.people p'));
-  const names = people.map((person) => person.textContent );
 
-  const deepDish = {
-    pizzaName: 'Deep Dish',
-    size: 'Medium',
-    ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
-  };
+  <script>
+    // (1) One use case for ...spread is an alternative to Array.from()
+    const people = [...document.querySelectorAll('.people p')];
+    // people are now a proper array
+    console.log(people);
+    // map now works
+    const names = people.map(person => person.textContent);
 
-  const shoppingList = ['Milk', 'Flour', ...deepDish.ingredients];
-  // console.log(shoppingList);
+    const deepDish = {
+      pizzaName: 'Deep Dish',
+      size: 'Medium',
+      ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
+    };
 
-  const comments = [
-    { id: 209384, text: 'I love your dog!' },
-    { id: 523423, text: 'Cuuute! 🐐' },
-    { id: 632429, text: 'You are so dumb' },
-    { id: 192834, text: 'Nice work on this wes!' },
-  ];
-  const id = 632429;
-  const commentIndex = comments.findIndex(comment => comment.id === id);
+    // (2) When you want to create a new array off of a property from a object
+    const shoppingList = ['Milk', 'Flour', ...deepDish.ingredients];
+    // this is a true copy, not a reference
+    console.log(shoppingList);
 
-  const newComments = [...comments.slice(0,commentIndex), ...comments.slice(commentIndex + 1)];
-  console.log(newComments);
+    // (3) When you have an array of objects
+    // and you need to remove one of those objects
+    // from the array
+    const comments = [
+      { id: 209384, text: 'I love your dog!' },
+      { id: 523423, text: 'Cuuute! 🐐' },
+      { id: 632429, text: 'You are so dumb' },
+      { id: 192834, text: 'Nice work on this wes!' },
+    ];
 
-</script>
+    const id = 632429;
+    const commentindex = comments.findIndex(comment => comment.id === id);
+    console.log(commentindex);
+
+    // we want everything before the mean comment
+    // and everything after the mean comment
+    // but...we get back an array of arrays
+    // we want an array of comment objects
+    // so what we can do is use ...spread
+    const newComments = [...comments.slice(0, commentindex), ...comments.slice(commentindex + 1)];
+    // now get back an array of objects
+    console.log(newComments);
+  </script>
 </body>
+
 </html>
