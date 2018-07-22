@@ -1,35 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array .from() and .of()</title>
 </head>
+
+<body>
   <div class="people">
     <p>Wes</p>
     <p>Kait</p>
     <p>Snickers</p>
   </div>
-<body>
-<script>
-  // const people = document.querySelectorAll('.people p');
-  // const peopleArray = Array.from(people, person => {
-  //   console.log(person);
-  //   return person.textContent;
-  // });
-  // console.log(peopleArray);
 
-  // // const names = people.map(person => person.textContent);
+  <script>
+    // Both .from() and .of() are not on the Prototype but the Array itself
+    // Array.from() will take something like a DOM Element Object and turn it into an Array
+    const people = document.querySelectorAll('.people p');
+    // log would return a NodeList
+    console.log(people);
+    // map wouldn't work because it's not an array
+    const names = people.map(person => person.textContent);
+    // so we have to use Array.from() to turn it into an array
+    const peopleArray = Array.from(people);
+    // log returns array
+    console.log(peopleArray);
+    // now map works
+    const names = peopleArray.map(person => person.textContent);
 
-  function sumAll() {
-    const nums = Array.from(arguments);
-    return nums.reduce((prev, next) => prev + next, 0);
-  }
+    // we can do this in one go instead of two lines
+    // Array.from() takes a second argument which is a map function
+    // let's do it in a couple of lines so it's nice and visible
+    const people = document.querySelectorAll('.people p');
+    const peopleArray = Array.from(people, person => {
+      return person.textContent;
+    });
 
-  sumAll(2, 34, 23, 234, 234, 234234, 234234, 2342);
+    console.log(peopleArray);
 
-  const ages = Array.of(12,4,23,62,34);
-  console.log(ages);
+    // We can convert an arguments object into an array
+    function sumAll() {
+      // perfect use case for reduce
+      // but...doesn't work, arguments is Object
+      // return arguments.reduce((prev, next) => prev + next, 0);
 
-</script>
+      // much better 👍
+      const nums = Array.from(arguments);
+      return nums.reduce((prev, next) => prev + next, 0);
+    }
+
+    sumAll(2, 34, 23, 234, 234234, 234234, 2342);
+
+    // Array.of() is going to create an array from every single element you pass it
+    const ages = Array.of(12, 4, 23, 62, 34);
+    
+    console.log(ages);
+
+  </script>
 </body>
+
 </html>

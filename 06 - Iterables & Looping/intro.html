@@ -1,50 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Iterables & Looping</title>
 </head>
+
 <body>
-<script>
-  /* eslint-disable */
-   Array.prototype.shuffle = function() {
-     var i = this.length, j, temp;
-     if ( i == 0 ) return this;
-     while ( --i ) {
-      j = Math.floor( Math.random() * ( i + 1 ) );
-      temp = this[i];
-      this[i] = this[j];
-      this[j] = temp;
+  <script>
+    /* eslint-disable */
+    // for...in is going to show this
+    Array.prototype.shuffle = function () {
+      var i = this.length, j, temp;
+      if (i == 0) return this;
+      while (--i) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = this[i];
+        this[i] = this[j];
+        this[j] = temp;
+      }
+      return this;
+    };
+
+    const cuts = ['Chuck', 'Brisket', 'Shank', 'Short Rib'];
+
+    // for...in is going to show this
+    cuts.shop = 'MM Meats'
+
+    // (1) classic for loop
+    // downside: confusing syntax, doesn't read nice
+    for (i = 0; i < cuts.length; i++) {
+      console.log(cuts[i]);
     }
-    return this;
-  };
 
-  const cuts = ['Chuck', 'Brisket', 'Shank', 'Short Rib'];
+    // (2) forEach loop
+    // downside: can't abort loop, can't skip one of the ones
+    cuts.forEach(cut => {
+      console.log(cut);
 
-  cuts.shop = 'MM MEats';
+      // doesn't work
+      if(cut === 'Brisket') {
+        break;
+      }
+    });
 
-  // for (let i = 0; i < cuts.length; i++) {
-  //   console.log(cuts[i]);
-  // }
-
-  // cuts.forEach((cut) => {
-  //   console.log(cut);
-  //   if(cut === 'Brisket') {
-  //     continue;
-  //   }
-  // });
-
-  // for (const index in cuts) {
-  //   console.log(cuts[index]);
-  // }
-
-  for (const cut of cuts) {
-    if(cut === 'Brisket') {
-      continue;
+    // (3) for...in loop
+    // downside: anytime you add a property, method or anything
+    // to the array it's also going to show up
+    for (const index in cuts) {
+      console.log(cuts[index]);
     }
-    console.log(cut);
-  }
 
-</script>
+    // (4) for...of loop
+    // best of all three worlds and you can use it for any type of data
+    // except objects
+    for (const cut of cuts) {
+      // you're able to use break or continue
+      if (cut === 'Brisket') {
+        break;
+      }
+      console.log(cut);
+    }
+
+  </script>
 </body>
+
 </html>

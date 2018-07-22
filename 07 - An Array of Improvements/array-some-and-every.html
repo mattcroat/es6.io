@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array .some() and .every()</title>
 </head>
+
 <body>
-<script>
-  const ages = [32, 15, 19, 12];
+  <script>
+    // They're not part of es6 but underused
+    // some() and every() will check the data in an array to check
+    // if some or all of the items meet what you're looking for
 
-  // 👵👨 is there at least one adult in the group?
-  const adultPresent = ages.some(age => age >= 18);
-  console.log(adultPresent);
+    const ages = [32, 15, 19, 12];
 
-  // 🍻 is everyone old enough to drink?
-  const allOldEnough = ages.every(age => age >= 19);
-  console.log(allOldEnough);
+    // 👵👨 is there at least one adult in the group?
+    const adultPresent = ages.some(age => age >= 18);
+    // returns true
+    console.log(adultPresent);
 
+    // 🍻 is everyone old enough to drink?
+    const allOldEnough = ages.every(age => age >= 19);
+    // returns false
+    console.log(allOldEnough);
 
-</script>
+  </script>
 </body>
+
 </html>

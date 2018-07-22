@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Iterables & Looping</title>
 </head>
+
 <body>
 
-<script>
-  const apple = {
-    color: 'Red',
-    size: 'Medium',
-    weight: 50,
-    sugar: 10
-  };
+  <script>
+    // A plain object is not a iterable
+    // What are our options?
+    // We're going to be able to use entries() against an object in ES 2017
+    // and we can already polyfill
+    // But what are our other options?
+    // We can use Object.keys()
+    const apple = {
+      color: 'Red',
+      size: 'Medium',
+      weight: 50,
+      sugar: 10
+    };
 
-  for (const prop in apple) {
-    const value = apple[prop];
-    console.log(value, prop);
-  }
+    // this won't work
+    for (const prop of apple) {
+      console.log(prop);
+    }
 
-</script>
+    // works with a polyfill
+    for (const prop of apple.entries()) {
+      console.log(prop);
+    }
+
+    // take an object and return an array of all of the keys
+    for (const prop of Object.keys(apple)) {
+      // get the value from the keys
+      const value = apple[prop];
+      console.log(value, prop);
+    }
+
+    // similar solution without having to use Object.keys()
+    for (const prop in apple) {
+      const value = apple[prop];
+      console.log(value, prop);
+    }
+
+  </script>
 </body>
+
 </html>
