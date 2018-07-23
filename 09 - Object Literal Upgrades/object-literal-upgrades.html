@@ -1,59 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Object Literal Upgrades</title>
 </head>
+
 <body>
-<script>
-  const first = 'snickers';
-  const last = 'bos';
-  const age = 2;
-  const breed = 'King Charles Cav';
-  const dog = {
-    firstName: first,
-    last,
-    age,
-    breed,
-    pals: ['Hugo', 'Sunny']
-  };
-  console.log(dog);
+  <script>
+    const first = 'snickers';
+    const last = 'bos';
+    const age = 2;
+    const breed = 'King Charles Cav';
+    // (1) If the property name and the variable you're setting it to
+    // are named the exact same thing you can just use the name
+    const dog = {
+      firstName: first,
+      last,
+      age,
+      breed,
+      pals: ['Hugo', 'Sunny']
+    };
 
-  const modal = {
-    create(selector) {
+    console.log(dog);
 
-    },
-    open(content) {
+    // (2) Method defintions inside of an object
+    // We can leave out the colon and the function keyword
+    // and it would be the same thing
+    const modal = {
+      create(selector) {
 
-    },
-    close(goodbye) {
+      },
+      open(content) {
 
+      },
+      close(goodbye) {
+
+      }
     }
-  }
 
-  function invertColor(color) {
-      return '#' + ("000000" + (0xFFFFFF ^ parseInt(color.substring(1),16)).toString(16)).slice(-6);
-  }
+    // (3) Computed property names
+    function invertColor(color) {
+      return '#' + ("000000" + (0xFFFFFF ^ parseInt(color.substring(1), 16)).toString(16)).slice(-6);
+    }
 
-  const key = 'pocketColor';
-  const value = '#ffc600';
+    const key = 'pocketColor';
+    const value = '#ffc600';
 
-  const tShirt = {
-    [key]: value,
-    [`${key}Opposite`]: invertColor(value)
-  };
+    // How would we make a key of color opposite?
+    // We need to compute the copy
+    // Previously you had to make the object and then update it
+    // but now we can do it inside our object literal
+    const tShirt = {
+      [key]: value,
+      [`${key}Opposite`]: invertColor(value)
+    }
 
-  const keys = ['size', 'color', 'weight'];
-  const values = ['medium', 'red', 100];
+    console.log(tShirt);
 
-  const shirt = {
-    [keys.shift()]: values.shift(),
-    [keys.shift()]: values.shift(),
-    [keys.shift()]: values.shift(),
-  }
-  console.log(shirt);
+    // (4) Funky data from an API
+    // What if we want to pair these values?
+    const keys = ['size', 'color', 'weight'];
+    const values = ['medium', 'red', '100'];
 
+    const shirt = {
+      // size: medium
+      [keys.shift()]: values.shift(),
+      // color: red
+      [keys.shift()]: values.shift(),
+      // weight: 100
+      [keys.shift()]: values.shift()
+    }
 
-</script>
+    console.log(shirt);
+  </script>
 </body>
+
 </html>

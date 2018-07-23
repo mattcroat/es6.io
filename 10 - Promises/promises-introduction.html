@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Promises!</title>
 </head>
+
 <body>
-<script>
-const postsPromise = fetch('http://wesbos.com/wp-json/wp/v2/posts');
+  <script>    
+    // Promise is something that will happen in the future but not immediately
+    // JavaScript is totally asynchronous
 
-postsPromise
-  .then(data => data.json())
-  .then(data => { console.log(data) })
-  .catch((err) => {
-    console.error(err);
-  })
+    // fetch the data from the url
+    // this will queue it up and return a promise
+    const postsPromise = fetch('https://wesbos.com/wp-json/wp/v2/posts');
+    // we can then listen to it
+    // it will only run when the data successfully comes back
+    // and it returns data
+    // but we need to return it as json
+    // so we get the actual post data
+    // you can chain .thens together and put it on their own line
+    // for readabilities sake
+    // if there's an error we can use .catch at the end
+    postsPromise
+      .then(data => data.json())
+      .then(data => { console.log(data) })
+      .catch(err => console.error(err))
 
-</script>
+  </script>
 </body>
+
 </html>

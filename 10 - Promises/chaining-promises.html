@@ -1,67 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Chaining Promises</title>
 </head>
+
 <body>
-<script>
-  const posts = [
-    { title: 'I love JavaScript', author: 'Wes Bos', id: 1 },
-    { title: 'CSS!', author: 'Chris Coyier', id: 2 },
-    { title: 'Dev tools tricks', author: 'Addy Osmani', id: 3 },
-  ];
+  <script>
+    // Another useful case for promises is when you need some flow control
+    // Example when querying a database using Node.js
 
-  const authors = [
-    { name: 'Wes Bos', twitter: '@wesbos', bio: 'Canadian Developer' },
-    { name: 'Chris Coyier', twitter: '@chriscoyier', bio: 'CSS Tricks and CodePen' },
-    { name: 'Addy Osmani', twitter: '@addyosmani', bio: 'Googler' },
-  ];
+    // Imagine these two are a database and we'll simulate ourselves
+    // connecting to a database which won't be accessible to us immediately
+    // which is why we're gonna use promises
+    const posts = [
+      { title: 'I love JavaScript', author: 'Wes Bos', id: 1 },
+      { title: 'CSS!', author: 'Chris Coyier', id: 2 },
+      { title: 'Dev tools tricks', author: 'Addy Osmani', id: 3 },
+    ];
 
-  function getPostById(id) {
-    // create a new promise
-    return new Promise((resolve, reject) => {
-      // using a settimeout to mimick a databse
-      setTimeout(() => {
-        // find the post we want
-        const post = posts.find(post => post.id === id);
-        if(post) {
-          resolve(post); // send the post back
+    const authors = [
+      { name: 'Wes Bos', twitter: '@wesbos', bio: 'Canadian Developer' },
+      { name: 'Chris Coyier', twitter: '@chriscoyier', bio: 'CSS Tricks and CodePen' },
+      { name: 'Addy Osmani', twitter: '@addyosmani', bio: 'Googler' },
+    ];
+
+    // We're gonna create two seperate functions that return promises
+    // and then chain them together
+    function getPostById(id) {
+      // create a new promise
+      return new Promise((resolve, reject) => {
+        // we'll use setTimeout just to simulate it taking time
+        setTimeout(() => {
+          // find the post we want
+          const post = posts.find(post => post.id === id);
+
+          if (post) {
+            // send the post back
+            resolve(post);
+          } else {
+            reject(Error('No Post Was Found!'));
+          }
+        }, 200)
+      });
+    }
+
+    // Hydrating? xD
+    // This function will return a promise itself
+    // so if we return a promise inside of a .then
+    // it's going to allow us to chain a .then onto the next line
+    function hydrateAuthor(post) {
+      // create a new promise
+      return new Promise((resolve, reject) => {
+        // find the author
+        const authorDetails = authors.find(person => person.name === post.author);
+      
+        if (authorDetails) {
+          // "hydrate" the post object with the author object
+          post.author = authorDetails;
+          resolve(post);
         } else {
-          reject(Error('No Post Was Found!'));
+          reject(Error('Can not find the author'));
         }
-      }, 200);
-    });
-  }
+      });
+    }
 
-  function hydrateAuthor(post) {
-    // create a new promise
-    return new Promise((resolve, reject) => {
-      // find the author
-      const authorDetails = authors.find(person => person.name === post.author);
-      if(authorDetails) {
-        // "hydrate" the post object with the author object
-        post.author = authorDetails;
-        resolve(post);
-      } else {
-        reject(Error('Can not find the author'));
-      }
-    });
-  }
-
-  getPostById(3)
-    .then(post => {
-      return hydrateAuthor(post);
-    })
-    .then(post => {
-      console.log(post);
-    })
-    .catch(err => {
-      console.error(err);
-    });
-
-
-
-</script>
+    getPostById(2)
+      .then(post => {
+        return hydrateAuthor(post);
+      })
+      .then(post => {
+        console.log(post);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  </script>
 </body>
+
 </html>
