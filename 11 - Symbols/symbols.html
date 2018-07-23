@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Symbols</title>
 </head>
+
 <body>
-<script>
-  const wes = Symbol('Wes');
-  const person = Symbol('Wes');
+  <script>
+    // There's a 7th primitive type that's been added to JavaScript
+    // Number, String, Object, Boolean, Null, Undefined, Symbol
+    // Symbols are unique identifiers, they avoid us having naming collisions
+    // Any time you want to create a property in a unique way
+    // that's when you should reach for a symbol
+    
+    // Wes is not a value, it's a descriptor, the symbol itself is just a identifier
+    const wes = Symbol('Wes');
+    const person = Symbol('Wes');
 
-  const classRoom = {
-    [Symbol('Mark')] : { grade: 50, gender: 'male' },
-    [Symbol('olivia')]: { grade: 80, gender: 'female' },
-    [Symbol('olivia')]: { grade: 80, gender: 'female' },
-  };
+    // Useful when creating an object of your class
+    const classRoom = {
+      [Symbol('Mark')]: { grade: 50, gender: 'male' },
+      [Symbol('Olivia')]: { grade: 80, gender: 'female' },
+      [Symbol('Olivia')]: { grade: 80, gender: 'female' },
+    };
 
-  for (const person in classRoom) {
-    console.log(person);
-  }
+    // Symbols are not inumerable which means we can not loop over them
+    for (person in classRoom) {
+      // nothing will be shown
+      console.log(person);
+    }
 
-  const syms = Object.getOwnPropertySymbols(classRoom);
-  const data = syms.map(sym => classRoom[sym]);
-  console.log(data);
-
-</script>
+    // If you want to access a value
+    const syms = Object.getOwnPropertySymbols(classRoom);
+    // but there's no actual data, so how do we get it?
+    console.log(syms)
+    // We can get it with map
+    const data = syms.map(sym => classRoom[sym]);
+    console.log(data);
+  </script>
 </body>
+
 </html>
