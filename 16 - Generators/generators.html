@@ -1,42 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Generators</title>
 </head>
+
 <body>
-<script>
-  function* listPeople() {
-    let i = 0;
-    yield i;
-    i++;
-    yield i;
-    i++;
-    yield i;
-  }
-
-  const people = listPeople();
-
-  const inventors = [
-    { first: 'Albert', last: 'Einstein', year: 1879 },
-    { first: 'Isaac', last: 'Newton', year: 1643 },
-    { first: 'Galileo', last: 'Galilei', year: 1564 },
-    { first: 'Marie', last: 'Curie', year: 1867 },
-    { first: 'Johannes', last: 'Kepler', year: 1571 },
-    { first: 'Nicolaus', last: 'Copernicus', year: 1473 },
-    { first: 'Max', last: 'Planck', year: 1858 },
-  ];
-
-  function* loop(arr) {
-    console.log(inventors);
-    for (const item of arr) {
-      yield item;
+  <script>
+    // Currently in JavaScript when you run a function
+    // it runs top to bottom and it's done
+    // However with a generator function you can start, pause, stop
+    // indefinite amount of time
+    function* listPeople() {
+      // yield returns a value until that function is called again
+      // we iterate over it using next()
+      // next().value if you don't care about the done status
+      let i = 0;
+      yield i;
+      i++;
+      yield i;
+      i++;
+      yield i;
     }
-  }
 
-  const inventorGen = loop(inventors);
+    // Invoke and store our function
+    const people = listPeople();
 
+    // Looping with a genereator
+    const inventors = [
+      { first: 'Albert', last: 'Einstein', year: 1879 },
+      { first: 'Isaac', last: 'Newton', year: 1643 },
+      { first: 'Galileo', last: 'Galilei', year: 1564 },
+      { first: 'Marie', last: 'Curie', year: 1867 },
+      { first: 'Johannes', last: 'Kepler', year: 1571 },
+      { first: 'Nicolaus', last: 'Copernicus', year: 1473 },
+      { first: 'Max', last: 'Planck', year: 1858 },
+    ];
 
-</script>
+    function* loop(arr) {
+      for (const item of arr) {
+        yield item;
+      }
+    }
+
+    const inventorGen = loop(inventors);
+  </script>
 </body>
+
 </html>

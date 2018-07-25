@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>System JS</title>
 </head>
+
 <body>
+  <!-- we include the jspm and run it through a server  -->
   <script src="https://jspm.io/system@0.19.js"></script>
   <script>
-
+    // Configure SystemJS
+    System.config({ transpiler: 'babel' });
+    // Entry point
+    System.import('./main.js');
   </script>
 </body>
+
 </html>

@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "browser-sync start --directory --server  --files '*.js, *.html, *.css'"
+    "server": "browser-sync start --directory --server --files '*.js, *.html, *.css"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.13.0"
+    "browser-sync": "^2.24.6"
   }
 }
