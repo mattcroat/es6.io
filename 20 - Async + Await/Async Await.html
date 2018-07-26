@@ -8,25 +8,29 @@
 <body>
   <script>
     function breathe(amount) {
+      // Return new Promise
       return new Promise((resolve, reject) => {
         if (amount < 500) {
           reject('That is too small of a value');
         }
+        // Timer that will wait however long we pass it
+        // and then log the message
         setTimeout(() => resolve(`Done for ${amount} ms`), amount);
-      });
+      })
     }
 
+    // Higher order catch error function
     function catchErrors(fn) {
-      return function (...args) {
-        return fn(...args).catch((err) => {
-          console.error('Ohhhh nooo!!!!!');
-          console.error(err);
-        });
+      // Returns a function
+      return function (...args) { // use ...rest to capture all arguments
+        // Returns a function that runs with a catch
+        return fn(...args).catch(err => console.error(err)); // ...spread the arguments
       }
     }
 
+    // Async function
     async function go(name, last) {
-      console.log(`Starting for ${name} ${last}!`);
+      console.log(`Starting for ${name} ${last}`);
       const res = await breathe(1000);
       console.log(res);
       const res2 = await breathe(300);
@@ -38,8 +42,9 @@
       console.log('end');
     }
 
+    // Wrap our go function
     const wrappedFunction = catchErrors(go);
-
+    // Run wrapped function
     wrappedFunction('Wes', 'Bos');
   </script>
 </body>
