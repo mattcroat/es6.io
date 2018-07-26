@@ -1,25 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Sets</title>
 </head>
+
 <body>
-<script>
-  const people = new Set();
-  people.add('Wes');
-  people.add('Snickers');
-  people.add('Kait');
+  <script>
+    // A Set in JavaScript is like a unique array
+    // meaning that you can only add the same item once
+    // with a nice API for managing the items inside of it
+    // You can't access the items individually and it's not index based
+    // Because it's index based length doesn't work but size does
 
-  for (const person of  people) {
-    console.log(person);
-  }
+    // Create a new Set by storing it in a variable
+    const people = new Set();
+    // Add items to a Set
+    people.add('Wes');
+    people.add('Snickers');
+    people.add('Kait');
+    // Remove items from a Set
+    people.delete('Wes');
+    // Clear entire Set
+    people.clear();
 
-  const students = new Set(['Wes', 'Kara', 'Tony']);
+    // SetIterator
+    const it = people.values();
+    // means it's a generator so we can loop over it
+    it.next();
 
-  const dogs = ['Snickers', 'Sunny'];
-  const dogSet = new Set(dogs);
+    // Feed it to a for...of loop
+    for (const person of people) {
+      console.log(people);
+    }
 
-</script>
+    // Set also has methods of keys and entries
+    people.keys(); // same as values
+    people.entries(); // so the API is same as Map
+
+    // Create values inside new Set
+    const students = new Set(['Wes', 'Kara', 'Tony']);
+
+    // We can pass an existing array to our Set
+    const dogs = ['Snickers', 'Sunny'];
+    const dogSet = new Set(dogs);
+
+    // Use has to see if someone is in a Set
+    students.has('Tony');
+  </script>
 </body>
+
 </html>

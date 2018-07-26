@@ -1,23 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Maps!</title>
 </head>
+
 <body>
-<script>
-  const dogs = new Map();
+  <script>
+    // If Sets are to Arrays then Maps are to Objects
+    // Map works similar to Set but has a key in a value instead of just values
 
-  dogs.set('Snickers', 3);
-  dogs.set('Sunny', 2);
-  dogs.set('Hugo', 10);
+    // Create new Map
+    const dogs = new Map();
 
-  dogs.forEach((val, key) => console.log(val, key));
+    // The keys and the values can be anything
+    dogs.set('Snickers', 3);
+    dogs.set('Sunny', 2);
+    dogs.set('Hugo', 10);
+    
+    // You can check if it has the item
+    dogs.has('Snickers');
+    
+    // You can get the item
+    dogs.get('Snickers');
+    
+    // Remove item
+    dogs.delete('Hugo');
+    
+    // You can loop over them in two ways
+    dogs.forEach((val, key) => console.log(val, key));
 
-  for (const [key, val] of dogs) {
-    console.log(key, val);
-  }
+    for (const dog of dogs) {
+      // Returns array where the first item is the key
+      // and the second item is the value
+      console.log(dog);
+    }
 
-</script>
+    // Knowing that we can use destructuring
+    for (const [key, val] of dogs) {
+      console.log(key, val);
+    }
+
+    // Clear the Map
+    dogs.clear();
+
+  </script>
 </body>
+
 </html>

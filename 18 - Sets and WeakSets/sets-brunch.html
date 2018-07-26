@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Brunch with Sets</title>
 </head>
-<body>
-<script>
-  const brunch = new Set();
-  // as people start coming in
-  brunch.add('wes');
-  brunch.add('Sarah');
-  brunch.add('Simone');
-  // ready to open!
-  const line = brunch.values();
-  console.log(line.next().value);
-  console.log(line.next().value);
-  brunch.add('Heather');
-  brunch.add('Snickers');
-  console.log(line.next().value);
-  console.log(line.next().value);
-  console.log(line.next().value);
 
-</script>
+<body>
+  <script>
+    const brunch = new Set();
+    // As people start coming in
+    brunch.add('Wes');
+    brunch.add('Sarah');
+    brunch.add('Simone');
+    // Ready to open!
+    const line = brunch.values();
+    console.log(line.next().value);
+    console.log(line.next().value);
+
+    // More people
+    brunch.add('Heather');
+    brunch.add('Snickers');
+    // line will remove itself from the setIterator
+    // where as the Set is the gold list of everyone that has currently went through it
+    // even if they were added after the fact of creating the Set and the line
+    console.log(line.next().value);
+    console.log(line.next().value);
+    console.log(line.next().value);
+  </script>
 </body>
+
 </html>

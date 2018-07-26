@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Brunch with Sets</title>
 </head>
+
 <body>
-<script>
-  let dog1 = { name: 'Snickers', age: 3 };
-  let dog2 = { name: 'sunny', age: 1 };
+  <script>
+    // WeakSet is like a Set except there are a number of limitations
+    // or benefits in some situations
 
-  const weakSauce = new WeakSet([dog1, dog2]);
+    let dog1 = { name: 'Snickers', age: 3 };
+    let dog2 = { name: 'Sunny', age: 1 };
 
-  console.log(weakSauce);
-  dog1 = null;
-  console.log(weakSauce);
+    // Same as before, passing it an iterable of items
+    // WeakSet can only contain Objects, no strings, numbers, array or anything else
+    // and you can't inumerate or loop over it
+    // WeakSet cleans itself up (garbage collection in memory) so there's no clear method
+    // When the reference to one of these dogs no longer exists
+    // it will automatically be taken out of our WeakSet (garbage collected)
+    const weakSauce = new WeakSet([dog1, dog2]);
 
-</script>
+    console.log(weakSauce);
+    dog1 = null;
+    console.log(weakSauce);
+
+  </script>
 </body>
+
 </html>

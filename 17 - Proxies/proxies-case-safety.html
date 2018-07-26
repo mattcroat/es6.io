@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Proxies!</title>
 </head>
+
 <body>
-<script>
-  const safeHandler = {
-    set(target, name, value) {
-      const likeKey = Object.keys(target).find(k => k.toLowerCase() === name.toLowerCase());
+  <script>
+    // Handler
+    const safeHandler = {
+      set(target, name, value) {
+        // Find all the like keys that are equal to the one
+        // that the person is looking for but in lowercase
+        const likeKey = Object.keys(target).find(k => k.toLowerCase() === name.toLowerCase());
 
-      if (!(name in target) && likeKey) {
-        throw new Error(`Oops! Looks like like we already have a(n) ${name} property but with the case of ${likeKey}.`);
+        // If there is no new property ID ❌ id and there is a like key
+        if (!(name in target) && likeKey) {
+          // Throw error
+          throw new Error(`Oops! Looks like we already have a ${name} property but with the case of ${likeKey}.`);
+        }
+        // If that doesn't happen set the key for them
+        target[name] = value;
       }
-      target[name] = value;
     }
-  };
 
-  const safety = new Proxy({ id: 100 }, safeHandler);
+    // New saftey object
+    const saftey = new Proxy({ id: 100 }, safeHandler);
 
-  safety.ID = 200;
-
-</script>
+    // This should show an error because ID ❌ id
+    // and that would mean a new property
+    saftey.ID = 200;
+    
+  </script>
 </body>
+
 </html>

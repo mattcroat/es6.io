@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Maps!</title>
   <style>
     button {
       font-size: 50px;
-      margin:10px;
+      margin: 10px;
     }
   </style>
 </head>
+
 <body>
 
-<button>Snakes 🐍</button>
-<button>Cry 😂</button>
-<button>Ice Cream 🍦</button>
-<button>Flamin' 🔥</button>
-<button>Dancer 💃</button>
+  <button>Snakes 🐍</button>
+  <button>Cry 😂</button>
+  <button>Ice Cream 🍦</button>
+  <button>Flamin' 🔥</button>
+  <button>Dancer 💃</button>
 
-<script>
-  const clickCounts = new Map();
-  const buttons = document.querySelectorAll('button');
+  <script>
+    // One of the unique properties of a Map over a regular Object
+    // is that you can use the Object as a key in a Map
+    // meaning you can use it as something like a metadata dictionary
+    // where you don't want to store the metadata on the Object but about it
 
-  buttons.forEach(button => {
-    clickCounts.set(button, 0);
-    button.addEventListener('click', function() {
-      const val = clickCounts.get(this);
-      clickCounts.set(this, val + 1);
-      console.log(clickCounts);
+    // Map of click counts
+    const clickCounts = new Map();
+
+    // Select all the buttons
+    const buttons = document.querySelectorAll('button');
+
+    // Loop over every button and add it to the Map
+    buttons.forEach(button => {
+      // Set the key and value of button
+      clickCounts.set(button, 0);
+      // Add event listener
+      button.addEventListener('click', function() {
+        // This is going to be equal to the button we're clicking
+        const val = clickCounts.get(this);
+        console.log(val);
+        // Set the value, the key is going to be the button and the value incremented by 1
+        clickCounts.set(this, val + 1);
+        console.log(clickCounts);
+      });
     });
-  });
-</script>
+
+  </script>
 </body>
+
 </html>
