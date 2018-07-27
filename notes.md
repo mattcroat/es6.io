@@ -3365,7 +3365,7 @@ async function go() {
 go();
 ```
 
-# es6.io New, Future and Experimental Langauge Additions
+# es6.io: 21. New, Future and Experimental Langauge Additions
 ---
 
 ## Class properties
