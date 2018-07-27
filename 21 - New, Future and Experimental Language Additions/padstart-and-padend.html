@@ -7,7 +7,9 @@
 
 <body>
   <script>
+    // Pad the start or end of a string if it's not long enough
     const strings = ['short', 'medium size', 'this is really really long', 'this is really reall really really really really long'];
+    // Pad start based on the longest one
     const longestString = strings.sort(str => str.length).map(str => str.length)[0];
 
     strings.forEach(str => console.log(str.padStart(longestString)));
